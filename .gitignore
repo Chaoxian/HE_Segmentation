@@ -1,0 +1,11 @@
+*.png
+*.txt
+*.pth
+*.yaml
+*.err
+*.out
+ExternalData/
+models/
+slurm_logs/
+__pycache__/
+
