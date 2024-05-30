@@ -1,0 +1,33 @@
+model:
+  type: UNet
+  num_classes: 3
+
+train:
+  learning_rate: 0.001
+  batch_size: 8
+  num_epochs: 50
+  early_stop: 7
+  save_interval: 1
+
+lr_scheduler:
+  args:
+    patience: 3
+    factor: 0.1
+
+optimizer:
+  type: Adam
+  args:
+    lr: !!float 1e-4
+    weight_decay: !!float 1e-4
+
+val:  
+  batch_size: 1
+  view_cnt: 3
+
+data:
+  data_dir: "/dssg/home/acct-zhaochaoxian/zhaochaoxian-user1/data/dataset/val"
+  train_ratio: 0.8
+
+output_dir: 
+  model: models
+  log: logs

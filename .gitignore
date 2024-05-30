@@ -1,7 +1,6 @@
 *.png
 *.txt
 *.pth
-*.yaml
 *.err
 *.out
 ExternalData/

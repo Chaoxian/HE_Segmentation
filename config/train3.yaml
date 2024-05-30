@@ -1,0 +1,35 @@
+#仅关注3类，肿瘤细胞，免疫细胞和背景
+name: UNet_pannuke_3classes
+model:
+  type: UNet
+  num_classes: 3
+
+train:
+  learning_rate: 0.001
+  batch_size: 64
+  num_epochs: 100
+  early_stop: 15
+  save_interval: 1
+
+lr_scheduler:
+  args:
+    patience: 3
+    factor: 0.1
+
+optimizer:
+  type: Adam
+  args:
+    lr: 0.0001
+    weight_decay: 0.0001
+
+val:  
+  batch_size: 1
+  view_cnt: 10
+
+data:
+  data_dir: "/dssg/home/acct-zhaochaoxian/zhaochaoxian-user1/InstanceSegment/pathology_maskrcnn/final_pannuke_dataset_2"
+  train_ratio: 0.8
+
+output_dir: 
+  model: models
+  log: logs
