@@ -1,4 +1,4 @@
-#仅关注3类，肿瘤细胞，免疫细胞和背景
+#only focus on three classes: tumor cells, immune cells and background
 name: UNet_pannuke_3classes
 model:
   type: UNet

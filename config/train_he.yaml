@@ -1,4 +1,4 @@
-#仅关注2类，免疫细胞和背景
+#only focus on two classes: 0 and 1
 name: UNet_hedataset
 model:
   type: UNet

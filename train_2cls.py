@@ -59,7 +59,7 @@ val_dataset = SegmentationDataset_2cls(data_dir=data_dir, transform=transform_va
 # train_size = int(train_ratio * len(dataset))
 # val_size = len(dataset) - train_size
 # train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
-# train_dataset.dataset.transform = transform_val    # 不懂为什么要加.dataset.
+# train_dataset.dataset.transform = transform_val  
 # val_dataset.dataset.transform = transform_val
 train_loader = DataLoader(train_dataset, batch_size=config["train"]["batch_size"], shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=config["val"]["batch_size"], shuffle=False)
@@ -75,7 +75,7 @@ model.to(device)
 
 
 # Define loss function and optimizer
-cnt,sum=PixelWiseCnt(os.path.join(config["data"]["data_dir"],"train","sem_masks"))#modified by jidong at 2024/4/11
+cnt,sum=PixelWiseCnt(os.path.join(config["data"]["data_dir"],"train","sem_masks"))
 class_weights=torch.tensor(np.array([(sum/cnt[i]) for i in range(num_classes)])).to(device).float()
 criterion = nn.CrossEntropyLoss(weight=class_weights,reduction='mean')
 
@@ -104,7 +104,7 @@ for epoch in range(1,num_epochs+1):
         outputs = model(images)
         # results=torch.argmax(outputs,dim=1)   # executed in func: compute_miou
         # print(torch.unique(masks))
-        loss=criterion(outputs,masks)   # 好像要按照(模型预测,实际标签)的顺序传入loss_fn
+        loss=criterion(outputs,masks) 
         miou=compute_miou(outputs=outputs,targets=masks,num_classes=num_classes)
 
         # Backpropagation and optimization
@@ -170,7 +170,6 @@ colors_with_alpha[:, 3] = transparency   # transparency
 
 tensor2pil = transforms.ToPILImage()
 
-# 这里先假定val_batchsize一定是1
 for batch_idx, (images, masks, image_name) in enumerate(tqdm(val_loader)):
     images, masks = images.to(device), masks.to(device)
     masks=masks.to(torch.long)

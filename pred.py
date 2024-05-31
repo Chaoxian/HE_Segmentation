@@ -25,17 +25,16 @@ from scripts.metric import compute_miou
 
 
 def split_names_into_files(names, num_files):
-    # 计算每个文件中名字的数量
+    # compute the number of names per file
     names_per_file = len(names) // num_files
     
-    # 确保目标文件夹存在，如果不存在，则创建它
     if not os.path.exists('split_names'):
         os.makedirs('split_names')
     
-    # 将名字列表分成指定数量的子列表
+    # split the list of names into num_files sublists
     split_names = [names[i:i+names_per_file] for i in range(0, len(names), names_per_file)]
     
-    # 保存每个子列表到不同的文件中
+    # save each sublist to a separate file
     for i, name_list in enumerate(split_names):
         with open(f'split_names/names_{i+1}.txt', 'w') as file:
             for name in name_list:
@@ -47,10 +46,9 @@ def split_names_into_files(names, num_files):
                 file.write(name + '\n')
 
 def read_names_from_files(num_files):
-    # 初始化一个空列表来存储所有的名字
     all_names = []
 
-    # 读取每个文件中的名字并添加到列表中
+    # read the names from each file and append them to the list
     filename = f'split_names/names_{num_files}.txt'
     with open(filename, 'r') as file:
         names = file.read().splitlines()
